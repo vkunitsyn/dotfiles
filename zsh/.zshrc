@@ -8,6 +8,9 @@ export LC_ALL="en_US.UTF-8"
 export EDITOR="nvim"
 export VISUAL="nvim"
 
+# Keep PATH entries unique; the blocks below prepend on every shell start
+typeset -U path
+
 # --- Autocompletion & Paths ---
 fpath+=(
   /opt/homebrew/share/zsh/site-functions
@@ -52,6 +55,9 @@ alias ll="ls -al"
 alias lg="lazygit"
 alias cdb="cd -"
 
+# --- Lazygit ---
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+
 # --- Python Path ---
 if [ -d "/opt/homebrew/opt/python/libexec/bin" ]; then
   export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
@@ -63,8 +69,10 @@ export NVM_DIR="$HOME/.nvm"
 # Put the default node version's bin dir on PATH directly instead of sourcing
 # nvm.sh eagerly (~300ms). Keeps node/npm/npx available everywhere (including
 # for tools spawned from the shell, e.g. Neovim) without that cost.
+# An exact alias (e.g. v22.11.0) is used as is; anything else (lts/*, node, 22)
+# falls back to the newest installed version.
 if [[ -d "$NVM_DIR/versions/node" ]]; then
-  _nvm_default=$(<"$NVM_DIR/alias/default" 2>/dev/null)
+  [[ -r "$NVM_DIR/alias/default" ]] && _nvm_default=$(<"$NVM_DIR/alias/default")
   [[ "$_nvm_default" != v* || ! -d "$NVM_DIR/versions/node/$_nvm_default" ]] && \
     _nvm_default=$(ls "$NVM_DIR/versions/node" | sort -V | tail -1)
   [[ -n "$_nvm_default" ]] && path=("$NVM_DIR/versions/node/$_nvm_default/bin" $path)
@@ -86,7 +94,8 @@ export SDKMAN_DIR="/opt/homebrew/opt/sdkman-cli/libexec"
 # sdkman-init.sh eagerly (~30ms). Keeps java/gradle/etc. available for the shell and
 # anything it spawns without that cost.
 if [[ -d "$SDKMAN_DIR/candidates" ]]; then
-  for _sdk_current in "$SDKMAN_DIR"/candidates/*/current; do
+  # (N): no error if the candidates directory is empty
+  for _sdk_current in "$SDKMAN_DIR"/candidates/*/current(N); do
     [[ -d "$_sdk_current/bin" ]] || continue
     path=("$_sdk_current/bin" $path)
     export "${(U)${_sdk_current:h:t}}_HOME"="$_sdk_current"
