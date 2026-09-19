@@ -1,16 +1,33 @@
 # Dotfiles
 
-Non-sensitive configuration files stored in `~/Documents/config`.
+Non-sensitive configuration files stored in `~/config`, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-## Symlinks Setup
+Each top-level directory is a Stow package whose internal layout mirrors `$HOME`:
+
+```
+config/
+├── zsh/.zshrc
+├── tmux/.tmux.conf
+└── kitty/.config/kitty/kitty.conf
+```
+
+## Setup
 
 ```bash
-ln -sf ~/Documents/config/.zshrc ~/.zshrc
-ln -sf ~/Documents/config/.tmux.conf ~/.tmux.conf
+brew install stow
+cd ~/config
+stow -t ~ zsh tmux kitty
 ```
+
+`stow` symlinks each package's files into `$HOME` at the matching relative path. Re-running it is safe (idempotent); add `-R` to re-link after moving the repo, or `-D` to unlink a package.
 
 ## Verify Symlinks
 
 ```bash
-ls -la ~ | grep -E '\.zshrc|\.tmux.conf'
+stow -t ~ -n -v zsh tmux kitty   # dry run, shows what would (still) be linked
+readlink -f ~/.zshrc ~/.tmux.conf ~/.config/kitty/kitty.conf
 ```
+
+## Adding a new package
+
+Create a directory named after the tool, laid out exactly as it should appear under `$HOME` (e.g. `nvim/.config/nvim/init.lua`), then `stow -t ~ nvim`.
