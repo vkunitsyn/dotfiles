@@ -1,0 +1,20 @@
+gui:
+  nerdFontsVersion: "3"
+  showFileIcons: true
+  border: rounded
+  returnImmediately: true
+  theme:
+    lightTheme: false
+    activeBorderColor: [bold]
+git:
+  diffRenderers:
+    - command: delta --paging=never
+  log:
+    showGraph: "always"
+    showWholeGraph: true
+refresher:
+  refreshInterval: 2
+keybinding:
+  universal:
+    return: q
+promptToReturnFromSubprocess: false

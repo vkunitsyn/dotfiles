@@ -8,7 +8,8 @@ Each top-level directory is a Stow package whose internal layout mirrors `$HOME`
 config/
 ├── zsh/.zshrc
 ├── tmux/.tmux.conf
-└── kitty/.config/kitty/kitty.conf
+├── kitty/.config/kitty/kitty.conf
+└── lazygit/.config/lazygit/config.yml
 ```
 
 ## Setup
@@ -16,7 +17,7 @@ config/
 ```bash
 brew install stow
 cd ~/config
-stow -t ~ zsh tmux kitty
+stow -t ~ zsh tmux kitty lazygit
 ```
 
 `stow` symlinks each package's files into `$HOME` at the matching relative path. Re-running it is safe (idempotent); add `-R` to re-link after moving the repo, or `-D` to unlink a package.
@@ -24,8 +25,8 @@ stow -t ~ zsh tmux kitty
 ## Verify Symlinks
 
 ```bash
-stow -t ~ -n -v zsh tmux kitty   # dry run, shows what would (still) be linked
-readlink -f ~/.zshrc ~/.tmux.conf ~/.config/kitty/kitty.conf
+stow -t ~ -n -v zsh tmux kitty lazygit   # dry run, shows what would (still) be linked
+readlink -f ~/.zshrc ~/.tmux.conf ~/.config/kitty/kitty.conf ~/.config/lazygit/config.yml
 ```
 
 ## Adding a new package
