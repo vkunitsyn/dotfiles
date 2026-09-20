@@ -115,13 +115,8 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=200000
 SAVEHIST=200000
 
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY_TIME
-unsetopt SHARE_HISTORY
-
-setopt EXTENDED_HISTORY
-setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY            # all sessions write immediately and read each other's commands
+setopt EXTENDED_HISTORY         # store timestamps
+setopt HIST_IGNORE_SPACE        # commands starting with a space are not saved
 setopt HIST_REDUCE_BLANKS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS     # keep only the latest copy of a command
