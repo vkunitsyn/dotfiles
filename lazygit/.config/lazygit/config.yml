@@ -2,9 +2,7 @@ gui:
   nerdFontsVersion: "3"
   showFileIcons: true
   border: rounded
-  returnImmediately: true
   theme:
-    lightTheme: false
     activeBorderColor: [bold]
 git:
   diffRenderers:
