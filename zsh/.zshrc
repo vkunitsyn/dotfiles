@@ -19,7 +19,6 @@ fpath+=(
 
 # --- Oh My Zsh Plugins ---
 plugins=(
-  git
   brew
   macos
   colored-man-pages

@@ -1,0 +1,52 @@
+[user]
+	name = vkunitsyn
+	email = 13729077+vkunitsyn@users.noreply.github.com
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[init]
+	defaultBranch = main
+
+[core]
+	pager = delta
+
+[pager]
+	log = less
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	syntax-theme = TwoDark
+	line-numbers = true
+	navigate = true
+	side-by-side = true
+	features = decorations
+
+[delta "decorations"]
+	commit-decoration-style = none
+	file-style = bold yellow
+	file-decoration-style = none
+	hunk-header-decoration-style = cyan box ul
+	hunk-header-style = line-number syntax
+
+[diff]
+	colorMoved = default
+
+[merge]
+	conflictstyle = zdiff3
+
+[fetch]
+	prune = true
+
+[push]
+	autoSetupRemote = true
+
+[branch]
+	sort = -committerdate
+
+[log]
+	decorate = true
+	abbrevCommit = true
+	date = relative

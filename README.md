@@ -9,7 +9,8 @@ config/
 ├── zsh/.zshrc
 ├── tmux/.tmux.conf
 ├── kitty/.config/kitty/kitty.conf
-└── lazygit/.config/lazygit/config.yml
+├── lazygit/.config/lazygit/config.yml
+└── git/.gitconfig
 ```
 
 ## Setup
@@ -17,7 +18,7 @@ config/
 ```bash
 brew install stow
 cd ~/config
-stow -t ~ zsh tmux kitty lazygit
+stow -t ~ zsh tmux kitty lazygit git
 ```
 
 `stow` symlinks each package's files into `$HOME` at the matching relative path. Re-running it is safe (idempotent); add `-R` to re-link after moving the repo, or `-D` to unlink a package.
@@ -25,8 +26,8 @@ stow -t ~ zsh tmux kitty lazygit
 ## Verify Symlinks
 
 ```bash
-stow -t ~ -n -v zsh tmux kitty lazygit   # dry run, shows what would (still) be linked
-readlink -f ~/.zshrc ~/.tmux.conf ~/.config/kitty/kitty.conf ~/.config/lazygit/config.yml
+stow -t ~ -n -v zsh tmux kitty lazygit git   # dry run, shows what would (still) be linked
+readlink -f ~/.zshrc ~/.tmux.conf ~/.config/kitty/kitty.conf ~/.config/lazygit/config.yml ~/.gitconfig
 ```
 
 ## Adding a new package
