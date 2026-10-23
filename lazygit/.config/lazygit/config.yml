@@ -12,7 +12,4 @@ git:
     showWholeGraph: true
 refresher:
   refreshInterval: 2
-keybinding:
-  universal:
-    return: q
 promptToReturnFromSubprocess: false
